@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prediksi Diabetes Gestasional</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="toggle-container">
+          <label for="test-mode-toggle">Mode Ujicoba</label>
+          <label class="switch">
+            <input type="checkbox" id="test-mode-toggle" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <header>
+          <h1>Prediksi Risiko Diabetes pada Ibu Hamil</h1>
+          <p class="subtitle">Masukkan data untuk melakukan prediksi</p>
+        </header>
+
+        <form
+          action="{{ url_for('predict') }}"
+          method="post"
+          autocomplete="off"
+        >
+          <div class="form-grid">
+            <div class="input-group">
+              <label for="pregnancies">Jumlah Kehamilan</label>
+              <input
+                type="number"
+                step="any"
+                id="pregnancies"
+                name="pregnancies"
+                placeholder="Contoh: 1"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="glucose">Kadar Glukosa (mg/dL)</label>
+              <input
+                type="number"
+                step="any"
+                id="glucose"
+                name="glucose"
+                placeholder="Contoh: 120"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="blood_pressure">Tekanan Darah (mm Hg)</label>
+              <input
+                type="number"
+                step="any"
+                id="blood_pressure"
+                name="blood_pressure"
+                placeholder="Contoh: 80"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="skin_thickness">Tebal Lipatan Kulit (mm)</label>
+              <input
+                type="number"
+                step="any"
+                id="skin_thickness"
+                name="skin_thickness"
+                placeholder="Contoh: 20"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="insulin">Kadar Insulin (μU/mL)</label>
+              <input
+                type="number"
+                step="any"
+                id="insulin"
+                name="insulin"
+                placeholder="Contoh: 79"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="bmi">Indeks Massa Tubuh (BMI)</label>
+              <input
+                type="number"
+                step="any"
+                id="bmi"
+                name="bmi"
+                placeholder="Contoh: 32.1"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="dpf">Fungsi Silsilah Diabetes</label>
+              <input
+                type="number"
+                step="any"
+                id="dpf"
+                name="dpf"
+                placeholder="Contoh: 0.47"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="age">Usia (Tahun)</label>
+              <input
+                type="number"
+                step="any"
+                id="age"
+                name="age"
+                placeholder="Contoh: 33"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="button-container">
+            <div
+              id="test-buttons-wrapper"
+              style="display: none; gap: 1rem; width: 100%"
+            >
+              <button
+                type="button"
+                class="btn btn-test-negative"
+                onclick="fillFormNegative()"
+              >
+                Contoh Negatif
+              </button>
+              <button
+                type="button"
+                class="btn btn-test-positive"
+                onclick="fillFormPositive()"
+              >
+                Contoh Positif
+              </button>
+            </div>
+            <button type="submit" class="btn btn-primary">Cek Prediksi</button>
+          </div>
+        </form>
+
+        {% if result %}
+        <div class="result-card">
+          <h3>Hasil Prediksi:</h3>
+          <p>{{ result }}</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>
